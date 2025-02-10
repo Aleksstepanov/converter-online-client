@@ -1,0 +1,12 @@
+<!-- Шаблон для кнопки -->
+<button
+  [disabled]="disabled"
+  [ngClass]="{
+    'bg-blue-500 hover:bg-blue-600 text-white': !disabled,
+    'bg-gray-400 text-gray-700 cursor-not-allowed': disabled,
+  }"
+  class="w-[200px] h-[43px] rounded-lg text-white pt-[12px] pb-[12px] flex flex-col justify-center items-center"
+  (click)="onClick()"
+>
+  <span>{{ label }}</span>
+</button>
