@@ -1,0 +1,25 @@
+@theme {
+  --background-light: #f5f6fa;
+  --background-dark: #1b2431;
+
+  --green-500: #00b69b; /* label-primary */
+  --orange-500: #fd9a56; /* label-work */
+  --indigo-500: #6226ef; /* label-processing */
+  --purple-500: #d456fd; /* label-friends */
+  --red-500: #ef3826; /* label-rejected */
+  --blue-500: #5a8cff; /* label-social */
+  --yellow-500: #ffa756; /* label-on-hold */
+  --violet-500: #ba29ff; /* label-in-transit */
+
+  --text-completed: #00b69b;
+  --text-primary: #00b69b;
+  --text-work: #fd9a56;
+  --text-processing: #6226ef;
+  --text-friends: #d456fd;
+  --text-rejected: #ef3826;
+  --text-social: #5a8cff;
+  --text-on-hold: #ffa756;
+  --text-in-transit: #ba29ff;
+
+  --button-primary: #4880ff;
+}
