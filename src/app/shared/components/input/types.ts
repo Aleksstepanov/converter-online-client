@@ -1,17 +1,12 @@
-export const enum EInputTypeAttributes {
-  COLOR = 'color',
-  EMAIL = 'email',
-  PASSWORD = 'password',
-  TEXT = 'text',
-}
+import { IInputField } from '@shared/types';
 
-export type TInputProps = {
+export interface IInputProps extends IInputField {
   label: string;
   value: string;
   placeholder?: string;
-  type: EInputTypeAttributes;
+  type: 'input';
   hasError?: boolean;
   errorMessage?: string;
   className?: string;
   disabled?: boolean;
-};
+}

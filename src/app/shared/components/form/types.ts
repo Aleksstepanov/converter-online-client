@@ -1,23 +1,7 @@
-import { ValidatorFn } from '@angular/forms';
-
-export type TField = {
-  label: string;
-  name: string;
-  type: string;
-  placeholder?: string;
-  validators?: ValidatorFn[];
-  options?: TSelectOption[];
-};
-
-export type TSelectOption = {
-  label: string;
-  value: string | number;
-};
-
-export type TFields = TField[];
+import { TFields } from '@shared/types';
 
 export interface TFormComponentProps {
-  fields: TField[];
+  fields: TFields;
   data: TFormData;
   submitBtnTitle: string;
   loading?: boolean;

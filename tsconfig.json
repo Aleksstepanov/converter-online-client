@@ -20,7 +20,8 @@
     "module": "ES2022",
     "paths": {
       "@shared/*": ["src/app/shared/*"],
-      "@core/*": ["src/app/core/*"]
+      "@core/*": ["src/app/core/*"],
+      "@entities/*": ["src/app/entities/*"]
     }
   },
   "angularCompilerOptions": {

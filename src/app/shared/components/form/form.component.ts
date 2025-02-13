@@ -1,12 +1,20 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { TFields, TFormData, TFormComponentProps } from './types';
+import { TFormData, TFormComponentProps } from './types';
 import { NgForOf, NgIf } from '@angular/common';
 import { ButtonComponent } from '@shared/components/button/button.component';
+import { InputComponent } from '@shared/components/input/input.component';
+import { TFields } from '@shared/types';
 
 @Component({
   selector: 'app-form',
-  imports: [ReactiveFormsModule, NgForOf, NgIf, ButtonComponent],
+  imports: [
+    ReactiveFormsModule,
+    NgForOf,
+    NgIf,
+    ButtonComponent,
+    InputComponent,
+  ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
 })
