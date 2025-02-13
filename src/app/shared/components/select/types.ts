@@ -1,6 +1,6 @@
-import { ICheckboxField } from '@shared/types';
+import { ISelectField } from '@shared/types';
 
-export interface ICheckboxProps extends ICheckboxField {
+export interface ISelectProps extends ISelectField {
   value: string;
   hasError?: boolean;
   errorMessage?: string;

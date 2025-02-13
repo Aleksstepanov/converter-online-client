@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { ICheckboxProps } from './types';
-import { EInputTypeAttributes } from '@shared/components/input/types';
 
 @Component({
   selector: 'app-checkbox',
@@ -12,7 +11,6 @@ export class CheckboxComponent implements ICheckboxProps {
   @Input() label: string = '';
   @Input() value: string = '';
   @Input() placeholder?: string = '';
-  @Input() typeInput: EInputTypeAttributes = EInputTypeAttributes.CHECKBOX;
   @Input() hasError: boolean = false;
   @Input() errorMessage: string = '';
   @Input() className: string = '';

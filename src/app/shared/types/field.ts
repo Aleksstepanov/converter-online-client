@@ -17,8 +17,13 @@ export interface IInputField extends IBaseField {
 
 export interface ISelectField extends IBaseField {
   type: 'select';
-  options: { label: string; value: string }[];
+  options: TSelectOptions;
 }
+
+export type TSelectOptions = {
+  label: string;
+  value: string;
+}[];
 
 export interface ITextareaField extends IBaseField {
   type: 'textarea';
