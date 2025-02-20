@@ -1,6 +1,8 @@
 @import "tailwindcss";
-/*@import "./shared/styles/variables.css";*/
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "./app/shared/styles/theme.css";
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}

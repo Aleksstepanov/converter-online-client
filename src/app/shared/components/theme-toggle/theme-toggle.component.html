@@ -1,0 +1,6 @@
+<app-button
+  (buttonClick)="toggleTheme()"
+  class="px-4 py-2 rounded-lg bg-secondary text-white"
+>
+  {{ themeService.getTheme() === "dark" ? "Тёмная" : "Светлая" }}
+</app-button>

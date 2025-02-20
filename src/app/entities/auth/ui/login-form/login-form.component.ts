@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormComponent } from '@shared/components/form/form.component';
-import {TFields} from '@shared/types'
+import { TFields } from '@shared/types';
 
 @Component({
   selector: 'app-login-form',
@@ -16,21 +16,21 @@ export class LoginFormComponent {
       label: 'Username',
       type: 'input',
       placeholder: 'Введите имя',
-      typeInput: 'text'
+      typeInput: 'text',
     },
     {
       name: 'email',
       label: 'Email',
       type: 'input',
       placeholder: 'Введите email',
-      typeInput: 'text'
+      typeInput: 'text',
     },
     {
       name: 'password',
       label: 'Пароль',
       type: 'input',
       placeholder: 'Введите пароль',
-      typeInput: 'text'
+      typeInput: 'text',
     },
   ];
 
@@ -41,5 +41,4 @@ export class LoginFormComponent {
   };
 
   isLoading = false;
-
 }

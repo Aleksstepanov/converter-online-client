@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TFormData, TFormComponentProps } from './types';
-import {JsonPipe, NgForOf, NgIf} from '@angular/common';
+import { JsonPipe, NgForOf, NgIf } from '@angular/common';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { InputComponent } from '@shared/components/input/input.component';
 import { TFields } from '@shared/types';
@@ -34,7 +34,6 @@ export class FormComponent implements OnInit, TFormComponentProps {
 
       this.formGroup.addControl(field.name, new FormControl(value, validators));
     });
-
   }
 
   populate(data: TFormData) {

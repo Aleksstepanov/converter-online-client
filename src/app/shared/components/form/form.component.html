@@ -1,5 +1,4 @@
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-
   <div *ngFor="let field of fields">
     <app-input
       *ngIf="field.type === 'input'"
