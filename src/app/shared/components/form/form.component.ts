@@ -1,10 +1,11 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TFormData, TFormComponentProps } from './types';
-import { JsonPipe, NgForOf, NgIf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { InputComponent } from '@shared/components/input/input.component';
 import { TFields } from '@shared/types';
+import { InputValueAccessorDirective } from '@shared/directives/input-value-accessor.directive';
 
 @Component({
   selector: 'app-form',
@@ -14,7 +15,7 @@ import { TFields } from '@shared/types';
     NgIf,
     ButtonComponent,
     InputComponent,
-    JsonPipe,
+    InputValueAccessorDirective,
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',

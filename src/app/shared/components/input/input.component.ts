@@ -23,8 +23,8 @@ export class InputComponent implements IInputProps {
 
   @Output() valueChange: EventEmitter<string> = new EventEmitter();
 
-  // onInput(event: Event) {
-  //   const target = event.target as HTMLInputElement;
-  //   this.valueChange.emit(target.value);
-  // }
+  onInput(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.valueChange.emit(target.value);
+  }
 }

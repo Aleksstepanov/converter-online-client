@@ -10,6 +10,7 @@
     [class.border-red-500]="hasError"
     class="px-4 py-2 border rounded-md outline-none focus:ring-2 focus:ring-blue-500"
     [ngClass]="className"
+    (input)="onInput($event)"
   />
   <span *ngIf="hasError" class="text-red-500 text-sm mt-1">{{
     errorMessage
