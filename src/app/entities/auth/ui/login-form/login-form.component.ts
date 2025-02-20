@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormComponent } from '@shared/components/form/form.component';
-import { TFields, TFormData } from '@shared/components/form/types';
+import {TFields} from '@shared/types'
 
 @Component({
   selector: 'app-login-form',
@@ -14,24 +14,27 @@ export class LoginFormComponent {
     {
       name: 'username',
       label: 'Username',
-      type: 'text',
+      type: 'input',
       placeholder: 'Введите имя',
+      typeInput: 'text'
     },
     {
       name: 'email',
       label: 'Email',
-      type: 'email',
+      type: 'input',
       placeholder: 'Введите email',
+      typeInput: 'text'
     },
     {
       name: 'password',
       label: 'Пароль',
-      type: 'password',
+      type: 'input',
       placeholder: 'Введите пароль',
+      typeInput: 'text'
     },
   ];
 
-  formData: TFormData = {
+  formData = {
     username: 'JohnDoe',
     email: 'johndoe@example.com',
     password: '12345',
@@ -39,7 +42,4 @@ export class LoginFormComponent {
 
   isLoading = false;
 
-  handleSubmit(formData: TFormData) {
-    console.log('Форма отправлена:', formData);
-  }
 }

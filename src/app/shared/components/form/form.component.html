@@ -1,7 +1,6 @@
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-  <div *ngFor="let field of fields">
-    <label [for]="field.name">{{ field.label }}</label>
 
+  <div *ngFor="let field of fields">
     <app-input
       *ngIf="field.type === 'input'"
       [typeInput]="field.typeInput"
