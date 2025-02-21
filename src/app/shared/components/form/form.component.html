@@ -54,10 +54,12 @@
       >
     </div>
   </div>
-  <app-button
-    [label]="submitBtnTitle"
-    [disabled]="loading"
-    [ngClass]="buttonClass"
-    (buttonClick)="onSubmit()"
-  ></app-button>
+  <div class="w-[100%] flex flex-row justify-center">
+    <app-button
+      [label]="submitBtnTitle"
+      [disabled]="loading"
+      [buttonClass]="buttonClass"
+      (buttonClick)="onSubmit()"
+    ></app-button>
+  </div>
 </form>

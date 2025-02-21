@@ -1,12 +1,12 @@
-<div class="flex flex-col w-full" [ngClass]="className">
-  <label *ngIf="label" class="input__label">
-    {{ label }}
-  </label>
+<label class="checkbox">
   <input
     type="checkbox"
     [id]="name"
     [checked]="value"
     [disabled]="disabled"
     (change)="onCheckboxChange($event)"
+    class="hidden"
   />
-</div>
+  <span class="checkbox__box"></span>
+  {{ label }}
+</label>

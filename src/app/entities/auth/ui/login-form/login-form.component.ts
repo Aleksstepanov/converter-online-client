@@ -31,6 +31,7 @@ export class LoginFormComponent {
       name: 'rememberPassword',
       label: 'Remember Password',
       type: 'checkbox',
+      className: 'mt-5',
     },
   ];
 

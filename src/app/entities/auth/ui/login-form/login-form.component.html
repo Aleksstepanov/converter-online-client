@@ -6,10 +6,13 @@
   <div class="login-form__form-wrapper">
     <app-form
       [fields]="formFields"
-      [submitBtnTitle]="'Отправить'"
+      [submitBtnTitle]="'Sign In'"
       [loading]="isLoading"
       [formClass]="'login-form__form'"
-      [buttonClass]="'login-form__button'"
+      [buttonClass]="'w-[418px] mt-15'"
     ></app-form>
+    <div class="w-[100%] flex flex-row justify-center mt-[18px] mb-[90px]">
+      <p>Don’t have an account? <span>Create Account</span></p>
+    </div>
   </div>
 </div>
