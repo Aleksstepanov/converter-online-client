@@ -1,6 +1,15 @@
-<app-form
-  [fields]="formFields"
-  [data]="formData"
-  [submitBtnTitle]="'Отправить'"
-  [loading]="isLoading"
-></app-form>
+<div class="login-form">
+  <h3 class="login-form__title">Login to Account</h3>
+  <p class="login-form__subtitle">
+    Please enter your email and password to continue
+  </p>
+  <div class="login-form__form-wrapper">
+    <app-form
+      [fields]="formFields"
+      [submitBtnTitle]="'Отправить'"
+      [loading]="isLoading"
+      [formClass]="'login-form__form'"
+      [buttonClass]="'login-form__button'"
+    ></app-form>
+  </div>
+</div>

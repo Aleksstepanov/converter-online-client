@@ -8,6 +8,7 @@ export interface IBaseField {
   type: TTypeField;
   placeholder?: string;
   validators?: ValidatorFn[];
+  className?: string;
 }
 
 export interface IInputField extends IBaseField {

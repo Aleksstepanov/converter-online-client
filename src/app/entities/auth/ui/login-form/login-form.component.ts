@@ -12,33 +12,27 @@ import { TFields } from '@shared/types';
 export class LoginFormComponent {
   formFields: TFields = [
     {
-      name: 'username',
-      label: 'Username',
-      type: 'input',
-      placeholder: 'Введите имя',
-      typeInput: 'text',
-    },
-    {
       name: 'email',
-      label: 'Email',
+      label: 'Email address:',
       type: 'input',
-      placeholder: 'Введите email',
+      placeholder: 'esteban_shiller@gmail.com',
       typeInput: 'text',
+      className: 'mt-10',
     },
     {
       name: 'password',
-      label: 'Пароль',
+      label: 'Password:',
       type: 'input',
-      placeholder: 'Введите пароль',
-      typeInput: 'text',
+      placeholder: '******',
+      typeInput: 'password',
+      className: 'mt-10',
+    },
+    {
+      name: 'rememberPassword',
+      label: 'Remember Password',
+      type: 'checkbox',
     },
   ];
-
-  formData = {
-    username: 'JohnDoe',
-    email: 'johndoe@example.com',
-    password: '12345',
-  };
 
   isLoading = false;
 }

@@ -3,4 +3,5 @@ export interface TButtonProps {
   type?: 'primary' | 'secondary';
   disabled?: boolean;
   loading?: boolean;
+  buttonClass: string;
 }

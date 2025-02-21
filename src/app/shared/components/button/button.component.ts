@@ -12,6 +12,7 @@ export class ButtonComponent implements TButtonProps {
   @Input() label: string = '';
   @Input() disabled?: boolean = false;
   @Input() type?: 'primary' | 'secondary' = 'primary';
+  @Input() buttonClass: string = '';
 
   @Output() buttonClick: EventEmitter<void> = new EventEmitter();
 

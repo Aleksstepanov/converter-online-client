@@ -1,11 +1,13 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TFormData, TFormComponentProps } from './types';
-import { NgForOf, NgIf } from '@angular/common';
+import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { InputComponent } from '@shared/components/input/input.component';
+import { CheckboxComponent } from '@shared/components/checkbox/checkbox.component';
 import { TFields } from '@shared/types';
 import { InputValueAccessorDirective } from '@shared/directives/input-value-accessor.directive';
+import { CheckboxValueAccessorDirective } from '@shared/directives/checkbox-value-accessor.directive';
 
 @Component({
   selector: 'app-form',
@@ -15,7 +17,10 @@ import { InputValueAccessorDirective } from '@shared/directives/input-value-acce
     NgIf,
     ButtonComponent,
     InputComponent,
+    CheckboxComponent,
     InputValueAccessorDirective,
+    CheckboxValueAccessorDirective,
+    NgClass,
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
@@ -25,6 +30,8 @@ export class FormComponent implements OnInit, TFormComponentProps {
   @Input() data: TFormData = {};
   @Input() submitBtnTitle: string = '';
   @Input() loading: boolean = false;
+  @Input() formClass: string = '';
+  @Input() buttonClass: string = '';
 
   formGroup: FormGroup = new FormGroup({});
 

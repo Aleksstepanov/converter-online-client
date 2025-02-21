@@ -1,0 +1,8 @@
+.layout-public {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #4880ff;
+  height: 100vh;
+}

@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ICheckboxProps } from './types';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-checkbox',
-  imports: [],
+  imports: [NgClass, NgIf],
   templateUrl: './checkbox.component.html',
   styleUrl: './checkbox.component.css',
 })
@@ -17,4 +18,11 @@ export class CheckboxComponent implements ICheckboxProps {
   @Input() disabled: boolean = false;
   @Input() type: 'checkbox' = 'checkbox';
   @Input() name: string = '';
+
+  @Output() valueChange: EventEmitter<boolean> = new EventEmitter();
+
+  onCheckboxChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.valueChange.emit(!!target.value);
+  }
 }
