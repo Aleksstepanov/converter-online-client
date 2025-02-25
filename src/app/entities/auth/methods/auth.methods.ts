@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap, switchMap, catchError, of } from 'rxjs';
+import { Observable, tap, finalize, catchError, of } from 'rxjs';
 import { TAuthResponse } from '../model/auth.model';
 import { AuthStateModel } from '../model/auth-state.model';
 import { AUTH_STORAGE_KEYS, AUTH_API } from '../config/consts';
@@ -32,6 +32,7 @@ export class AuthMethods {
     rememberMe: boolean,
   ): Observable<TAuthResponse> {
     this.authState.setLoading(true);
+    console.log('🌐 API URL:', AUTH_API.LOGIN);
 
     return this.http
       .post<TAuthResponse>(AUTH_API.LOGIN, { email, password })
@@ -51,6 +52,9 @@ export class AuthMethods {
           error: () => {
             this.authState.setError('Ошибка входа');
           },
+        }),
+        finalize(() => {
+          this.authState.setLoading(false);
         }),
       );
   }

@@ -1,10 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ICheckboxProps } from './types';
-import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-checkbox',
-  imports: [NgClass, NgIf],
   templateUrl: './checkbox.component.html',
   styleUrl: './checkbox.component.css',
 })
