@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { AuthStateModel } from '../model/auth-state.model';
 import { AuthMethods } from '../methods/auth.methods';
 import { AuthGetters } from '../getters/auth.getters';
+import { tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +14,10 @@ export class AuthService {
   private methods: AuthMethods;
   private getters: AuthGetters;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) {
     this.methods = new AuthMethods(this.http, this.authState);
     this.getters = new AuthGetters(this.authState);
   }
@@ -25,11 +30,23 @@ export class AuthService {
     return this.getters.isAuthenticated();
   }
 
-  login(email: string, password: string, rememberMe: boolean) {
-    return this.methods.login(email, password, rememberMe);
+  getLoading() {
+    return this.getters.getLoading();
+  }
+
+  getError() {
+    return this.getters.getError();
+  }
+
+  login(email: string, password: string) {
+    return this.methods.login(email, password).pipe(
+      tap(() => {
+        this.router.navigate(['/home']);
+      }),
+    );
   }
 
   logout() {
-    this.methods.logout();
+    return this.methods.logout();
   }
 }

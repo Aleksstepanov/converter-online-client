@@ -1,26 +1,28 @@
 import { Component } from '@angular/core';
 import { FormComponent } from '@shared/components/form/form.component';
-import { formFieldsLogin } from '../../config/consts';
+import { formFieldsLogin, AUTH_STORAGE_KEYS } from '../../config/consts';
 import { AuthService } from '../../services/auth.service';
+import { TLoginFormData } from '../../model/auth.model';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-login-form',
-  imports: [FormComponent],
+  imports: [FormComponent, AsyncPipe],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.css',
   standalone: true,
 })
 export class LoginFormComponent {
-  isLoading = false;
   protected readonly formFieldsLogin = formFieldsLogin;
 
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
 
-  onSubmit(data: Record<string, unknown>) {
-    console.log('data', data);
-    const { email, password } = data;
-    this.authService
-      .login(email as string, password as string, false)
-      .subscribe();
+  onSubmit(data: TLoginFormData) {
+    const { email, password, rememberPassword } = data;
+    localStorage.setItem(
+      AUTH_STORAGE_KEYS.REMEMBER,
+      rememberPassword?.toString() || '',
+    );
+    this.authService.login(email, password).subscribe();
   }
 }

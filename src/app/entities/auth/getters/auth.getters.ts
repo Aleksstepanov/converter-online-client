@@ -13,10 +13,14 @@ export class AuthGetters {
   }
 
   getLoading() {
-    return this.authState.getAuthState().pipe(map((state) => state.loading));
+    return this.authState
+      .getAuthState()
+      .pipe(map((state) => (state.loading !== null ? state.loading : false)));
   }
 
   getError() {
-    return this.authState.getAuthState().pipe(map((state) => state.error));
+    return this.authState
+      .getAuthState()
+      .pipe(map((state) => state.error ?? ''));
   }
 }

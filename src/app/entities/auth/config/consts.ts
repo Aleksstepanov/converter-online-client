@@ -6,6 +6,7 @@ export const AUTH_API = {
 
 export const AUTH_STORAGE_KEYS = {
   TOKEN: 'access_token',
+  REFRESH: 'refresh_token',
   REMEMBER: 'isRemember',
 };
 

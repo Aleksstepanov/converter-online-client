@@ -7,7 +7,7 @@
     <app-form
       [fields]="formFieldsLogin"
       [submitBtnTitle]="'Sign In'"
-      [loading]="isLoading"
+      [loading]="authService.getLoading() | async"
       [formClass]="'login-form__form'"
       [buttonClass]="'w-[418px] mt-15'"
       (payload)="onSubmit($event)"

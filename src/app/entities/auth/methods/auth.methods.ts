@@ -5,7 +5,8 @@ import { AuthStateModel } from '../model/auth-state.model';
 import { AUTH_STORAGE_KEYS, AUTH_API } from '../config/consts';
 
 export class AuthMethods {
-  private readonly tokenKey = AUTH_STORAGE_KEYS.TOKEN;
+  private readonly accessTokenKey = AUTH_STORAGE_KEYS.TOKEN;
+  private readonly refreshTokenKey = AUTH_STORAGE_KEYS.REFRESH;
   private readonly rememberKey = AUTH_STORAGE_KEYS.REMEMBER;
 
   constructor(
@@ -18,36 +19,34 @@ export class AuthMethods {
   private loadToken() {
     const isRemember = localStorage.getItem(this.rememberKey) === 'true';
     const token = isRemember
-      ? localStorage.getItem(this.tokenKey)
-      : sessionStorage.getItem(this.tokenKey);
+      ? localStorage.getItem(this.accessTokenKey)
+      : sessionStorage.getItem(this.accessTokenKey);
 
     if (token) {
       this.authState.setToken(token);
     }
   }
 
-  login(
-    email: string,
-    password: string,
-    rememberMe: boolean,
-  ): Observable<TAuthResponse> {
+  login(email: string, password: string): Observable<TAuthResponse> {
     this.authState.setLoading(true);
-    console.log('🌐 API URL:', AUTH_API.LOGIN);
 
     return this.http
       .post<TAuthResponse>(AUTH_API.LOGIN, { email, password })
       .pipe(
         tap({
-          next: (response) => {
+          next: ({ accessToken, refreshToken }) => {
+            const rememberMe = localStorage.getItem(this.rememberKey);
             if (rememberMe) {
-              localStorage.setItem(this.tokenKey, response.accessToken);
+              localStorage.setItem(this.accessTokenKey, accessToken);
+              localStorage.setItem(this.refreshTokenKey, refreshToken);
               localStorage.setItem(this.rememberKey, 'true');
             } else {
-              sessionStorage.setItem(this.tokenKey, response.accessToken);
+              sessionStorage.setItem(this.accessTokenKey, accessToken);
+              sessionStorage.setItem(this.refreshTokenKey, refreshToken);
               localStorage.setItem(this.rememberKey, 'false');
             }
 
-            this.authState.setToken(response.accessToken);
+            this.authState.setToken(accessToken);
           },
           error: () => {
             this.authState.setError('Ошибка входа');
@@ -64,13 +63,21 @@ export class AuthMethods {
 
     return this.http.post<TAuthResponse>(AUTH_API.REFRESH, {}).pipe(
       tap({
-        next: (response) => {
-          sessionStorage.setItem(this.tokenKey, response.accessToken);
-          this.authState.setToken(response.accessToken);
+        next: ({ accessToken, refreshToken }) => {
+          const rememberMe = localStorage.getItem(this.rememberKey);
+          if (rememberMe) {
+            localStorage.setItem(this.accessTokenKey, accessToken);
+          } else {
+            sessionStorage.setItem(this.accessTokenKey, accessToken);
+          }
+          this.authState.setToken(accessToken);
         },
         error: () => {
           this.authState.clearSession();
         },
+      }),
+      finalize(() => {
+        this.authState.setLoading(false);
       }),
       catchError(() => {
         this.authState.clearSession();
@@ -90,9 +97,9 @@ export class AuthMethods {
       const isRemember = localStorage.getItem(this.rememberKey) === 'true';
 
       if (isRemember) {
-        localStorage.removeItem(this.tokenKey);
+        localStorage.removeItem(this.accessTokenKey);
       } else {
-        sessionStorage.removeItem(this.tokenKey);
+        sessionStorage.removeItem(this.accessTokenKey);
       }
 
       localStorage.removeItem(this.rememberKey);

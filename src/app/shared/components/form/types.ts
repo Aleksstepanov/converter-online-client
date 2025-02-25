@@ -4,7 +4,7 @@ export interface TFormComponentProps {
   fields: TFields;
   data: TFormData;
   submitBtnTitle: string;
-  loading?: boolean;
+  loading: boolean | null;
   formClass: string;
   buttonClass: string;
 }

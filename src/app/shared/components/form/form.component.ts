@@ -32,15 +32,15 @@ import { CheckboxValueAccessorDirective } from '@shared/directives/checkbox-valu
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
 })
-export class FormComponent implements OnInit, TFormComponentProps {
+export class FormComponent<T> implements OnInit, TFormComponentProps {
   @Input() fields: TFields = [];
   @Input() data: TFormData = {};
   @Input() submitBtnTitle: string = '';
-  @Input() loading: boolean = false;
+  @Input() loading: boolean | null = false;
   @Input() formClass: string = '';
   @Input() buttonClass: string = '';
 
-  @Output() payload: EventEmitter<Record<string, unknown>> = new EventEmitter();
+  @Output() payload: EventEmitter<T> = new EventEmitter();
 
   public formGroup: FormGroup = new FormGroup({});
 
@@ -90,6 +90,6 @@ export class FormComponent implements OnInit, TFormComponentProps {
   }
 
   onSubmit() {
-    this.payload.emit(this.formGroup.value);
+    this.payload.emit(this.formGroup.value as T);
   }
 }
