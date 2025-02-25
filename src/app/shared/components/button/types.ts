@@ -4,4 +4,5 @@ export interface TButtonProps {
   disabled?: boolean;
   loading?: boolean;
   buttonClass: string;
+  htmlType: 'submit' | 'button';
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormComponent } from '@shared/components/form/form.component';
-import { formFieldsLogin } from '../../model';
+import { formFieldsLogin } from '../../config/consts';
 
 @Component({
   selector: 'app-login-form',
@@ -12,4 +12,8 @@ import { formFieldsLogin } from '../../model';
 export class LoginFormComponent {
   isLoading = false;
   protected readonly formFieldsLogin = formFieldsLogin;
+
+  onSubmit(data: Record<string, unknown>) {
+    console.log('data', data);
+  }
 }

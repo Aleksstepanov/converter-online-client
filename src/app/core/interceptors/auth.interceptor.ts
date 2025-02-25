@@ -7,25 +7,32 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, switchMap, take } from 'rxjs/operators';
+import { AuthService } from '@entities/auth/services/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  constructor(private authService: AuthService) {}
+
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('token') || '';
-    const cloned = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    return this.authService.getAuthState().pipe(
+      take(1),
+      switchMap((authState) => {
+        const token = authState.data;
 
-    return next.handle(cloned).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.error('API Error:', error);
-        return throwError(() => new Error(error.message || 'Server error'));
+        const cloned = token
+          ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
+          : req;
+
+        return next.handle(cloned).pipe(
+          catchError((error: HttpErrorResponse) => {
+            console.error('API Error:', error);
+            return throwError(() => new Error(error.message || 'Server error'));
+          }),
+        );
       }),
     );
   }

@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  SimpleChanges,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TFormData, TFormComponentProps } from './types';
 import { NgClass, NgForOf, NgIf } from '@angular/common';
@@ -33,7 +40,28 @@ export class FormComponent implements OnInit, TFormComponentProps {
   @Input() formClass: string = '';
   @Input() buttonClass: string = '';
 
-  formGroup: FormGroup = new FormGroup({});
+  @Output() payload: EventEmitter<Record<string, unknown>> = new EventEmitter();
+
+  public formGroup: FormGroup = new FormGroup({});
+
+  getErrorMessage(fieldName: string): string {
+    const control = this.formGroup.get(fieldName);
+    if (!control || control.valid || !control.touched) return '';
+
+    if (control.hasError('required')) {
+      return 'Это поле обязательно!';
+    }
+
+    if (control.hasError('email')) {
+      return 'Некорректный email!';
+    }
+
+    if (control.hasError('minlength')) {
+      return `Минимальная длина: ${control.errors?.['minlength'].requiredLength} символов`;
+    }
+
+    return 'Некорректное значение';
+  }
 
   initializeForm() {
     this.fields.forEach((field) => {
@@ -62,6 +90,6 @@ export class FormComponent implements OnInit, TFormComponentProps {
   }
 
   onSubmit() {
-    console.log(this.formGroup.value);
+    this.payload.emit(this.formGroup.value);
   }
 }

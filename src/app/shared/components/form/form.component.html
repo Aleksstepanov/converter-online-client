@@ -8,6 +8,11 @@
       [placeholder]="field.placeholder"
       [label]="field.label"
       [className]="field?.className || ''"
+      [hasError]="
+        formGroup.controls[field.name].invalid &&
+        formGroup.controls[field.name].touched
+      "
+      [errorMessage]="getErrorMessage(field.name)"
     ></app-input>
 
     <textarea
@@ -57,9 +62,9 @@
   <div class="w-[100%] flex flex-row justify-center">
     <app-button
       [label]="submitBtnTitle"
-      [disabled]="loading"
+      [disabled]="loading || formGroup.invalid"
       [buttonClass]="buttonClass"
-      (buttonClick)="onSubmit()"
+      [htmlType]="'submit'"
     ></app-button>
   </div>
 </form>

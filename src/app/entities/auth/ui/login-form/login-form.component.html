@@ -10,6 +10,7 @@
       [loading]="isLoading"
       [formClass]="'login-form__form'"
       [buttonClass]="'w-[418px] mt-15'"
+      (payload)="onSubmit($event)"
     ></app-form>
     <div class="w-[100%] flex flex-row justify-center mt-[18px] mb-[90px]">
       <p>Don’t have an account? <span>Create Account</span></p>
