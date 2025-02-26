@@ -4,6 +4,7 @@ import { HomeComponent } from '@pages/home/home.component';
 import { RegisterComponent } from '@pages/register/register.component';
 import { LayoutDefaultComponent } from '@core/layouts/layout-default/layout-default.component';
 import { LayoutPublicComponent } from '@core/layouts/layout-public/layout-public.component';
+import { AuthGuards } from '@core/guards/auth.guards';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,7 @@ export const routes: Routes = [
   {
     path: 'home',
     component: LayoutDefaultComponent,
+    canActivate: [AuthGuards],
     children: [
       {
         path: '',

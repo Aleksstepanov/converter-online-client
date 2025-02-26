@@ -7,10 +7,11 @@ import {
 import { AuthService } from '../../services/auth.service';
 import { TRegisterFormData } from '../../model/auth.model';
 import { AsyncPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register-form',
-  imports: [AsyncPipe, FormComponent],
+  imports: [AsyncPipe, FormComponent, RouterLink],
   templateUrl: './register-form.component.html',
   styleUrl: './register-form.component.css',
 })

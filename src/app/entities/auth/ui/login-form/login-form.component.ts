@@ -4,10 +4,11 @@ import { FORM_FIELDS_LOGIN, AUTH_STORAGE_KEYS } from '../../config/consts';
 import { AuthService } from '../../services/auth.service';
 import { TLoginFormData } from '../../model/auth.model';
 import { AsyncPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
-  imports: [FormComponent, AsyncPipe],
+  imports: [FormComponent, AsyncPipe, RouterLink],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.css',
   standalone: true,
