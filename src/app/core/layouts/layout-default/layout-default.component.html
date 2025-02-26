@@ -1,4 +1,7 @@
-<div>
-  <p>layout-default works!</p>
-  <router-outlet></router-outlet>
+<div class="layout-default">
+  <app-sidebar class="flex flex-col w-[20%]"></app-sidebar>
+  <main class="layout-default__main">
+    <app-the-header></app-the-header>
+    <router-outlet></router-outlet>
+  </main>
 </div>

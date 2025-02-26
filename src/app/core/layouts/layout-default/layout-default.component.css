@@ -1,0 +1,7 @@
+.layout-default {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  overflow: scroll;
+  background: #d5d5d5;
+}

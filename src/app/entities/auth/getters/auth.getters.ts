@@ -1,6 +1,10 @@
 import { map } from 'rxjs';
 import { AuthStateModel } from '../model/auth-state.model';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthGetters {
   constructor(private authState: AuthStateModel) {}
 
