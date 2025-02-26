@@ -8,6 +8,11 @@ import { AuthGuards } from '@core/guards/auth.guards';
 
 export const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'home',
+  },
+  {
     path: 'login',
     component: LayoutPublicComponent,
     children: [
