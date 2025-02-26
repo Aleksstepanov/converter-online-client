@@ -12,3 +12,18 @@ export type TLoginFormData = {
   password: string;
   rememberPassword?: boolean;
 };
+
+export type TRegisterFormData = TLoginFormData & {
+  firstName: string;
+  lastName: string;
+};
+
+export type TLoginPayload = {
+  email: string;
+  password: string;
+};
+
+export type TRegisterPayload = TLoginPayload & {
+  firstName: string;
+  lastName: string;
+};

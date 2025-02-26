@@ -6,4 +6,5 @@ export interface IInputProps extends IInputField {
   errorMessage?: string;
   className?: string;
   disabled?: boolean;
+  isRequired?: boolean;
 }

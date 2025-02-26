@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IInputProps } from './types';
 import { NgClass, NgIf } from '@angular/common';
+import { RequiredIconComponent } from '@shared/components/required-icon/required-icon.component';
 
 @Component({
   selector: 'app-input',
-  imports: [NgIf, NgClass],
+  imports: [NgIf, NgClass, RequiredIconComponent],
   templateUrl: './input.component.html',
   styleUrl: './input.component.css',
   standalone: true,
@@ -20,6 +21,7 @@ export class InputComponent implements IInputProps {
   @Input() disabled: boolean = false;
   @Input() type: 'input' = 'input';
   @Input() name: string = '';
+  @Input() isRequired?: boolean = false;
 
   @Output() valueChange: EventEmitter<string> = new EventEmitter();
 

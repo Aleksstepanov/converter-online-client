@@ -5,6 +5,7 @@ import { AuthMethods } from '../methods/auth.methods';
 import { AuthGetters } from '../getters/auth.getters';
 import { tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { TLoginPayload, TRegisterPayload } from '../model/auth.model';
 
 @Injectable({
   providedIn: 'root',
@@ -38,8 +39,16 @@ export class AuthService {
     return this.getters.getError();
   }
 
-  login(email: string, password: string) {
-    return this.methods.login(email, password).pipe(
+  login(payload: TLoginPayload) {
+    return this.methods.login(payload).pipe(
+      tap(() => {
+        this.router.navigate(['/home']);
+      }),
+    );
+  }
+
+  register(payload: TRegisterPayload) {
+    return this.methods.register(payload).pipe(
       tap(() => {
         this.router.navigate(['/home']);
       }),

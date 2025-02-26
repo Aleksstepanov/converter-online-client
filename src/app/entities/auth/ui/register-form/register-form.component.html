@@ -1,19 +1,16 @@
-<div class="login-form">
-  <h3 class="login-form__title">Login to Account</h3>
-  <p class="login-form__subtitle">
-    Please enter your email and password to continue
-  </p>
-  <div class="login-form__form-wrapper">
+<div class="register-form">
+  <h3 class="register-form__title">Create an account</h3>
+  <p class="register-form__subtitle">Create a account to continue</p>
+  <div class="register-form__form-wrapper">
     <app-form
-      [fields]="formFieldsLogin"
-      [submitBtnTitle]="'Sign In'"
+      [fields]="formFieldsRegistration"
+      [submitBtnTitle]="'Sign Up'"
       [loading]="authService.getLoading() | async"
-      [formClass]="'login-form__form'"
       [buttonClass]="'w-[418px] mt-15'"
       (payload)="onSubmit($event)"
     ></app-form>
     <div class="w-[100%] flex flex-row justify-center mt-[18px] mb-[90px]">
-      <p>Don’t have an account? <span>Create Account</span></p>
+      <p>Already have an account? <span>Login</span></p>
     </div>
   </div>
 </div>

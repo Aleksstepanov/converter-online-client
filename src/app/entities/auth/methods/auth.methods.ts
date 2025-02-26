@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap, finalize, catchError, of } from 'rxjs';
-import { TAuthResponse } from '../model/auth.model';
+import {
+  TAuthResponse,
+  TLoginPayload,
+  TRegisterPayload,
+} from '../model/auth.model';
 import { AuthStateModel } from '../model/auth-state.model';
 import { AUTH_STORAGE_KEYS, AUTH_API } from '../config/consts';
 
@@ -27,11 +31,42 @@ export class AuthMethods {
     }
   }
 
-  login(email: string, password: string): Observable<TAuthResponse> {
+  login({ email, password }: TLoginPayload): Observable<TAuthResponse> {
     this.authState.setLoading(true);
 
     return this.http
       .post<TAuthResponse>(AUTH_API.LOGIN, { email, password })
+      .pipe(
+        tap({
+          next: ({ accessToken, refreshToken }) => {
+            const rememberMe = localStorage.getItem(this.rememberKey);
+            if (rememberMe) {
+              localStorage.setItem(this.accessTokenKey, accessToken);
+              localStorage.setItem(this.refreshTokenKey, refreshToken);
+              localStorage.setItem(this.rememberKey, 'true');
+            } else {
+              sessionStorage.setItem(this.accessTokenKey, accessToken);
+              sessionStorage.setItem(this.refreshTokenKey, refreshToken);
+              localStorage.setItem(this.rememberKey, 'false');
+            }
+
+            this.authState.setToken(accessToken);
+          },
+          error: () => {
+            this.authState.setError('Ошибка входа');
+          },
+        }),
+        finalize(() => {
+          this.authState.setLoading(false);
+        }),
+      );
+  }
+
+  register(payload: TRegisterPayload): Observable<TAuthResponse> {
+    this.authState.setLoading(true);
+
+    return this.http
+      .post<TAuthResponse>(AUTH_API.REGISTER, { ...payload })
       .pipe(
         tap({
           next: ({ accessToken, refreshToken }) => {
