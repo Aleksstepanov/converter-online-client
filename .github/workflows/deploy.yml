@@ -34,6 +34,7 @@ jobs:
           target: "/home/converter/apps/converter-online-client/dist/"
           strip_components: 3
           overwrite: true
+          tar_exec: "tar --no-same-owner -xzf"
 
       - name: Перезапуск Nginx
         uses: appleboy/ssh-action@master
