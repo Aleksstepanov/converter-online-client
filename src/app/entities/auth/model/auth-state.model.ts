@@ -1,7 +1,11 @@
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { TAuthState } from './auth.model';
 import { getDefaultApiSlice } from '@shared/models/api-slice.model';
 
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthStateModel {
   private authState$ = new BehaviorSubject<TAuthState>(getDefaultApiSlice({}));
 

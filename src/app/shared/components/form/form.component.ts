@@ -6,7 +6,12 @@ import {
   EventEmitter,
   Output,
 } from '@angular/core';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { TFormData, TFormComponentProps } from './types';
 import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { ButtonComponent } from '@shared/components/button/button.component';
@@ -65,8 +70,11 @@ export class FormComponent<T> implements OnInit, TFormComponentProps {
 
   initializeForm() {
     this.formGroup = new FormGroup({});
+
     this.fields.forEach((field) => {
-      const validators = field.validators || [];
+      const validators = field.validators
+        ? Validators.compose(field.validators)
+        : null;
       const value = this.data[field.name] || '';
 
       this.formGroup.addControl(field.name, new FormControl(value, validators));
@@ -97,8 +105,7 @@ export class FormComponent<T> implements OnInit, TFormComponentProps {
     if (!this.formGroup.invalid) {
       this.payload.emit(this.formGroup.value as T);
     } else {
-      this.formGroup.markAllAsTouched()
+      this.formGroup.markAllAsTouched();
     }
-
   }
 }

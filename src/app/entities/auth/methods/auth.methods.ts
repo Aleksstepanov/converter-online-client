@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap, finalize, catchError, of } from 'rxjs';
 import {
@@ -8,6 +9,9 @@ import {
 import { AuthStateModel } from '../model/auth-state.model';
 import { AUTH_STORAGE_KEYS, AUTH_API } from '../config/consts';
 
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthMethods {
   private readonly accessTokenKey = AUTH_STORAGE_KEYS.TOKEN;
   private readonly refreshTokenKey = AUTH_STORAGE_KEYS.REFRESH;

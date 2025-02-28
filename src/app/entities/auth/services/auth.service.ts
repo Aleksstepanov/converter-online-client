@@ -12,16 +12,13 @@ import { TLoginPayload, TRegisterPayload } from '../model/auth.model';
 })
 export class AuthService {
   private authState = new AuthStateModel();
-  private methods: AuthMethods;
-  private getters: AuthGetters;
 
   constructor(
     private http: HttpClient,
     private router: Router,
-  ) {
-    this.methods = new AuthMethods(this.http, this.authState);
-    this.getters = new AuthGetters(this.authState);
-  }
+    private methods: AuthMethods,
+    private getters: AuthGetters,
+  ) {}
 
   getAuthState() {
     return this.getters.getAuthState();
