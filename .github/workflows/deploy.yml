@@ -1,0 +1,44 @@
+name: Deploy Angular Frontend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout репозиторий
+        uses: actions/checkout@v3
+
+      - name: Установка Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Установка зависимостей
+        run: npm install
+
+      - name: Билд проекта
+        run: npm run build -- --configuration=production
+
+      - name: Деплой на сервер
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "dist/converter-online-client/browser/"
+          target: "/home/converter/apps/converter-online-client/dist/"
+          strip_components: 3
+
+      - name: Перезапуск Nginx
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            sudo systemctl restart nginx
