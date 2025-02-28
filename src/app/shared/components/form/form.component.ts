@@ -64,6 +64,7 @@ export class FormComponent<T> implements OnInit, TFormComponentProps {
   }
 
   initializeForm() {
+    this.formGroup = new FormGroup({});
     this.fields.forEach((field) => {
       const validators = field.validators || [];
       const value = this.data[field.name] || '';
@@ -84,12 +85,20 @@ export class FormComponent<T> implements OnInit, TFormComponentProps {
     this.initializeForm();
   }
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes['fields'] && !changes['fields'].firstChange) {
+      this.initializeForm();
+    }
     if (changes['data'] && !changes['data'].firstChange) {
       this.populate(this.data);
     }
   }
 
   onSubmit() {
-    this.payload.emit(this.formGroup.value as T);
+    if (!this.formGroup.invalid) {
+      this.payload.emit(this.formGroup.value as T);
+    } else {
+      this.formGroup.markAllAsTouched()
+    }
+
   }
 }
