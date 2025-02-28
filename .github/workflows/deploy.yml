@@ -33,6 +33,7 @@ jobs:
           source: "dist/converter-online-client/browser/"
           target: "/home/converter/apps/converter-online-client/dist/"
           strip_components: 3
+          overwrite: true
 
       - name: Перезапуск Nginx
         uses: appleboy/ssh-action@master
